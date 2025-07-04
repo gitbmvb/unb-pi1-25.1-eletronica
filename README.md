@@ -11,7 +11,7 @@ Este repositório contempla os códigos desenvolvidos durante a disciplina de Pr
 
 #### 2. Esquemático
 
-![esquematico_base](docs/img/esquematico_base.png)
+![esquematico_base](docs/img/esquematico_base_julho.png)
 
 ### Foguete
 
