@@ -1,3 +1,4 @@
+#include "config.h"
 #include "mpu6050.h"
 #include <Adafruit_MPU6050.h>
 #include <Wire.h>
@@ -7,7 +8,8 @@ static Adafruit_MPU6050 mpu;
 
 bool initMPU(){
   WireMPU.begin(MPU_SDA, MPU_SCL);
-  return mpu.begin(&WireMPU);
+  return mpu.begin(MPU6050_I2CADDR_DEFAULT, &WireMPU);
+
 }
 
 bool readMPU(MPUData &d){

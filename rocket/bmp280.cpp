@@ -1,3 +1,4 @@
+#include "config.h"
 #include "bmp280.h"
 #include <Adafruit_BMP280.h>
 #include <Wire.h>
@@ -7,7 +8,7 @@ static Adafruit_BMP280 bmp;
 
 bool initBMP(){
   WireBMP.begin(BMP_SDA, BMP_SCL);
-  return bmp.begin(0x76, &WireBMP);
+  return bmp.begin(0x76);
 }
 
 bool readBMP(float &t, float &p){

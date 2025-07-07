@@ -1,9 +1,9 @@
 #include "config.h"
-#include "sensors/bmp280.h"
-#include "sensors/mpu6050.h"
-#include "sensors/gps.h"
-#include "comm/bluetooth.h"
-#include "comm/mqtt.h"
+#include "bmp280.h"
+#include "mpu6050.h"
+#include "gps.h"
+#include "bluetooth.h"
+#include "mqtt.h"
 #include <WiFi.h>
 
 void setup(){
