@@ -2,14 +2,14 @@
 #include <Wire.h>
 #include <Adafruit_BMP280.h>
 #include <MPU6050.h>
-#include <TinyGPSPlus.h>
-#include <HardwareSerial.h>
+// #include <TinyGPSPlus.h>
+// #include <HardwareSerial.h>
 
 // Sensor objects
 Adafruit_BMP280 bmp;
 MPU6050 mpu;
-TinyGPSPlus gps;
-HardwareSerial gpsSerial(1);
+// TinyGPSPlus gps;
+// HardwareSerial gpsSerial(1);
 
 void setupSensors() {
   Wire.begin();
@@ -25,7 +25,7 @@ void setupSensors() {
     while (1);
   }
 
-  gpsSerial.begin(9600, SERIAL_8N1, 16, 17);
+  // gpsSerial.begin(9600, SERIAL_8N1, 16, 17);
 }
 
 SensorData readSensors() {
@@ -39,13 +39,13 @@ SensorData readSensors() {
   mpu.getMotion6(&data.ax, &data.ay, &data.az, &data.gx, &data.gy, &data.gz);
 
   // GPS
-  while (gpsSerial.available()) {
-    gps.encode(gpsSerial.read());
-  }
+  // while (gpsSerial.available()) {
+  //   gps.encode(gpsSerial.read());
+  // }
 
-  data.latitude = gps.location.isValid() ? gps.location.lat() : 0.0;
-  data.longitude = gps.location.isValid() ? gps.location.lng() : 0.0;
-  data.speed = gps.speed.kmph();
+  // data.latitude = gps.location.isValid() ? gps.location.lat() : 0.0;
+  // data.longitude = gps.location.isValid() ? gps.location.lng() : 0.0;
+  // data.speed = gps.speed.kmph();
 
   return data;
 }

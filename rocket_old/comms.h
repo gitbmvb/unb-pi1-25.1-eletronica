@@ -5,7 +5,7 @@
 
 void setupCommunication();
 void sendMQTT(const String& payload);
-void sendBluetooth(const String& payload);
+// void sendBluetooth(const String& payload);
 String formatPayload(const SensorData& data);
 
 #endif

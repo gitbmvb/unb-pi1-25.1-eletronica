@@ -1,7 +1,7 @@
 #include "comms.h"
-#include <WiFi.h>
+#include <ESP8266WiFi.h>
 #include <PubSubClient.h>
-#include <BluetoothSerial.h>
+// #include <BluetoothSerial.h>
 
 // WiFi credentials
 const char* ssid = "brunomartins";
@@ -10,7 +10,7 @@ const char* mqtt_server = "broker.hivemq.com";
 
 WiFiClient espClient;
 PubSubClient client(espClient);
-BluetoothSerial BTSerial;
+// BluetoothSerial BTSerial;
 
 void setupCommunication() {
   // WiFi
@@ -29,7 +29,7 @@ void setupCommunication() {
   }
 
   // Bluetooth
-  BTSerial.begin("ESP32_BT");
+  // BTSerial.begin("ESP32_BT");
 }
 
 void sendMQTT(const String& payload) {
@@ -40,9 +40,9 @@ void sendMQTT(const String& payload) {
   client.publish("unb/rockets/g1", payload.c_str());
 }
 
-void sendBluetooth(const String& payload) {
-  BTSerial.println(payload);
-}
+// void sendBluetooth(const String& payload) {
+//   BTSerial.println(payload);
+// }
 
 String formatPayload(const SensorData& d) {
   String json = "{";
