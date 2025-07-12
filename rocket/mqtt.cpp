@@ -1,7 +1,7 @@
+#include "config.h"
 #include "mqtt.h"
 #include <WiFi.h>
 #include <PubSubClient.h>
-#include "config.h"
 
 static WiFiClient wifiClient;
 static PubSubClient mqttClient(wifiClient);

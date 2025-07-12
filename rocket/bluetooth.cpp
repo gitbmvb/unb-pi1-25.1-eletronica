@@ -1,3 +1,4 @@
+#include "config.h"
 #include "bluetooth.h"
 #include "config.h"
 BluetoothSerial BT;

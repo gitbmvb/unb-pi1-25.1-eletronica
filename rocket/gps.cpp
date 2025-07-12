@@ -1,7 +1,7 @@
+#include "config.h"
 #include "gps.h"
 #include <TinyGPS++.h>
 #include <HardwareSerial.h>
-#include "config.h"
 
 TinyGPSPlus gps;
 HardwareSerial gpsSerial(GPS_SERIAL_NUM);
