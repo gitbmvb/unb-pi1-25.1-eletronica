@@ -1,4 +1,5 @@
 #include "bmp280.h"
+#include "config.h"
 #include <Adafruit_BMP280.h>
 #include <Wire.h>
 

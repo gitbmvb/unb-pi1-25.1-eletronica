@@ -1,4 +1,5 @@
 #include "bluetooth.h"
+#include "config.h"
 BluetoothSerial BT;
 
 void initBT(){

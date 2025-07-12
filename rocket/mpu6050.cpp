@@ -1,4 +1,5 @@
 #include "mpu6050.h"
+#include "config.h"
 #include <Adafruit_MPU6050.h>
 #include <Wire.h>
 

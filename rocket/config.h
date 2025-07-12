@@ -1,5 +1,7 @@
 #pragma once
 
+#include <Arduino.h>
+
 // I2C pins for BMP280
 #define BMP_SDA 21
 #define BMP_SCL 22
