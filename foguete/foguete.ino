@@ -62,7 +62,35 @@ void setup() {
   Serial.println("✅ Sistema pronto. Detectando lançamento...");
 }
 
+void loop() {
+  // Lê dados do sensor
+  sensors_event_t evento;
+  accel.getEvent(&evento);
+  
+  // Calcula aceleração total
+  float ax = evento.acceleration.x - calibracao.ax;
+  float ay = evento.acceleration.y - calibracao.ay;
+  float az = evento.acceleration.z - calibracao.az;
+  float aTotal = sqrt(ax*ax + ay*ay + az*az);
 
+  switch (estado) {
+    case AGUARDANDO_LANCAMENTO:
+      if (aTotal > ACEL_LANCAMENTO) {
+        iniciarVoo();
+      }
+      break;
+
+    case EM_VOO:
+      monitorarVoo(aTotal);
+      break;
+
+    case POUSO_DETECTADO:
+      aguardarConexaoBluetooth();
+      break;
+  }
+
+  delay(20); // Tempo para não bugar as leituras
+}
 
 // Calibrar o acelerometro de acordo com a posição do bixin
 void calibrarSensor() {
