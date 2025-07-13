@@ -89,6 +89,33 @@ void calibrarSensor() {
   Serial.print(" Z="); Serial.println(calibracao.az);
 }
 
+void aguardarConexaoBluetooth() {
+  if (SerialBT.available() && SerialBT.read() == 'a') {
+    enviarDadosArmazenados();
+  }
+}
+
+String gerarJsonDados() {
+  sensors_event_t evento;
+  accel.getEvent(&evento);
+  
+  StaticJsonDocument<200> doc;
+  doc["t"] = millis() - tempoDecolagem;
+  doc["ax"] = evento.acceleration.x - calibracao.ax;
+  doc["ay"] = evento.acceleration.y - calibracao.ay;
+  doc["az"] = evento.acceleration.z - calibracao.az;
+  doc["alt"] = bmp.readAltitude(1013.25);
+  doc["a"] = sqrt(
+    doc["ax"].as<float>() * doc["ax"].as<float>() +
+    doc["ay"].as<float>() * doc["ay"].as<float>() +
+    doc["az"].as<float>() * doc["az"].as<float>()
+  );
+  
+  String json;
+  serializeJson(doc, json);
+  return json;
+}
+
 void enviarDadosArmazenados() {
   Serial.println("Enviando dados armazenados...");
   for (int i = 0; i < totalDados; i++) {
