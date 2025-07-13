@@ -89,6 +89,33 @@ void calibrarSensor() {
   Serial.print(" Z="); Serial.println(calibracao.az);
 }
 
+void iniciarVoo() {
+  estado = EM_VOO;
+  tempoDecolagem = millis();
+  SerialBT.end(); // Desliga Bluetooth durante o voo
+  Serial.println("LANÇAMENTO DETECTADO! Iniciando coleta de dados...");
+  
+  // Armazena o primeiro ponto de dados
+  if (totalDados < MAX_DADOS) {
+    dadosVoo[totalDados++] = gerarJsonDados();
+  }
+}
+
+void monitorarVoo(float aTotal) {
+  // Armazena dados continuamente
+  if (totalDados < MAX_DADOS) {
+    dadosVoo[totalDados++] = gerarJsonDados();
+  }
+  Serial.println(dadosVoo[totalDados - 1]);
+
+  if (aTotal > ACEL_IMPACTO) {
+    estado = POUSO_DETECTADO;
+    SerialBT.begin("ESP32_Foguete"); // Detectou o pouso e ativa o bluetooth
+    Serial.println("POUSO DETECTADO! Aguardando conexão para envio de dados.");
+  }
+  delay(100);
+}
+
 void aguardarConexaoBluetooth() {
   if (SerialBT.available() && SerialBT.read() == 'a') {
     enviarDadosArmazenados();
