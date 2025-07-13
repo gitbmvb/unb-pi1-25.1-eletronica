@@ -88,3 +88,14 @@ void calibrarSensor() {
   Serial.print(" Y="); Serial.print(calibracao.ay);
   Serial.print(" Z="); Serial.println(calibracao.az);
 }
+
+void enviarDadosArmazenados() {
+  Serial.println("Enviando dados armazenados...");
+  for (int i = 0; i < totalDados; i++) {
+    SerialBT.println(dadosVoo[i]);
+    delay(5); // Espaço entre envios
+  }
+  SerialBT.println("{\"fim\":true}"); // Finaliza o envio
+  Serial.println("Dados enviados! Total: " + String(totalDados) + " registros.");
+  totalDados = 0; // Reseta o contador
+}
